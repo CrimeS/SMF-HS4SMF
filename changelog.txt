@@ -1,0 +1,54 @@
+[color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
+[b]0.7 - 21 March 2011[/b]
+o ! fixed issue where aeva links were being hidden in a portal block
+o ! fixed issue where the aspect ratio was being changed when the aeva option was enabled
+o + Improved the caption logic, it will now show the aeva caption text when available on a gallery image and show the caption as defined in the admin panel for other images (attachments, in line image, etc).
+
+[b]0.6 - 25 February 2011[/b]
+o + Added ability to always show slide-show controls on images, even on a single image
+o + Smart slide-show grouping (by message) improved, now all image forms in a post will be part of that posts slide-show (attachments, images or Aeva gallery.  Signature images are excluded.
+o + Improved Aeva gallery interaction to provide similar Highslide visuals as defined by the admin panel.
+o + Goggle Picasa thumbnails in the form of http://lh3.ggpht.com/xyz/abc/123/987/s144/xyz.jpg will Highslide
+o + Certain other image sites (imageshack) will Highslide from just the thumbnail image, the full link/image is no longer required.
+o + Updated to HS 4.1.9
+o ! Fixed error with postimage.org files causing an undefined index, plus improved its handling
+
+[b]0.5e - 3 November 2010[/b]
+o + Updated package for RC4, any new features will be added for RC4+ only, RC3 updates are done
+
+[b]0.5d - 12 October 2010[/b]
+o ! fixed an issue when using the topic subject in the header/footer breaking the javascript (un-escaped chars)
+
+[b]0.5c - 20 September 2010[/b]
+o ! fixed issue with slide control formatting when Aeva is installed
+
+[b]0.5b - 11 September 2010[/b]
+o ! fixed non fatal JS error for IE7 and below (thanks camoura)
+
+[b]0.5a - 06 September 2010[/b]
+o ! fixed imageshack regex issue 
+o + moved admin menu items to language strings
+o + enabled small and large dark graphic controls
+o + added hide slideshow controls on mouse out
+o + added ability to set window background color
+o + added x,y nudge so you can tweak the slideshow controls position
+o + improved logic for handling how/where controls appear when in header/footer or overlayed.
+o ! if no text is found for heading or caption a blank will be inserted to maintain formatting (captioneval and headingeval)
+
+[b]0.4 - 03 September 2010[/b]
+o ! fixed some undefined error log entrys
+o ! updated the database install program to fix init values and remove table dependency
+o ! fixed imageshack error (thanks Sabre™)
+o + added beta support for Postimage (Simple Image Upload) hosted images
+o + added alt="ns" option to prevent specified images from highsliding, use it as [code][img alt="ns"]your image[/img][/code]
+
+[b]0.3 Beta - 02 May 2010[/b]
+o ! Fixed missing global $sourcedir on hs4smf inclusion
+o ! fixed some undefined error log entries
+
+[b]0.2 Beta - 09 April 2010[/b]
+o ! Stopped highsliding smileys DOH!
+o + Added smart slideshow groups so you can have a slideshow of all the images in a single topic or a slideshow for each post with images
+
+[b]0.1 Beta - 08 April 2010[/b]
+o  Initial release

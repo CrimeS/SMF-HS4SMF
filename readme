@@ -1,0 +1,54 @@
+Highslide 4 SMF
+Introduction
+
+This modification adds the highslide lightbox effect to images and attachments in your post.
+
+Highslide JS is licensed under a Creative Commons Attribution-Non Commercial 2.5 License. This means you must get the author's permission to use Highslide JS on commercial websites. http://highslide.com/#licence
+Features
+
+    Shows a full-size image in a nice picture frame when the user clicks a thumbnail or attachment
+    Auto size images to fit browser window, with option to expand to full size with scrollbars
+    Slideshow for images on page
+    Prev/Next with arrow keys
+    Works for thumbnails from Postimage, Imageshack, Photobucket, iPicture, Radikal, Keep4u, Xs and Fotosik. 
+
+There are many admin settings available with this mod, go to admin - configuration - modification settings - Highslide
+
+    Disable/enable the mod
+    Disable/enable the use of Coral CDN as JS/CSS source
+    Disable/enable fade In/Out transition in Galleries
+    Disable/enable Highslide credits
+    Disable/enable Highslide on attachments
+    Enable the slideshow feature, includes attachments and post images
+    Smart slideshow option allowing each message in a post to have its own slideshow
+    Provide similiar highslide effects on Aeva Gallery
+    Expanded images to center of page or in place
+    Define slideshow delay in seconds (0-10)
+    Define graphical or mac style text boxes for slideshow controls
+    Define the sideshow control bar location
+    Define the frame style around the highslide image
+    Define how dark to make the background page when highsliding an image
+    Define the source for the text in the heading
+    Define the source for the text in the caption
+    Define how dark to make the background in the heading and caption area
+    Define the location for the caption
+    Define the location for the footer
+    Disable/enable hiding the heading, caption and slide controls on mouse out
+    Define the size and style of the slide controls 
+
+Installation
+
+Simply install the package to install this modification on the SMF Default Curve theme. Manual edits may be required for other themes.
+
+This mod is compatible with SMF 2.0 only.
+Changelog
+
+0.7a - 12 June 2011
+
+    + Minor updates for 2.0 Gold 
+
+0.7 - 21 March 2011
+
+    ! fixed issue where aeva links were being hidden in a portal block
+    ! fixed issue where the aspect ratio was being changed when the aeva option was enabled
+    + Improved the caption logic, it will now show the aeva caption text when available on a gallery image and show the caption as defined in the admin panel for other images (attachments, in line image, etc). 
