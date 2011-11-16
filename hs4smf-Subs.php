@@ -183,15 +183,14 @@ function hs4smf_fix_link($image)
 	global $context, $message;
 
 	/* Fix thumbnails for image hosting, some code from diggers:Highslide Image Viewer V 1.6 & karlbenson:Integrate Lightbox v1.4
-	
-	 The href link is not to a image but back to the image host page, where the full sized is returned. since we know the thumbnail image
-	 location its generally easy to build the correct link to the full-size for us to use.  Take the thumbnail image and based on the host
-	 strip out the thumb indicator, for example imageshack will have
-	 http://img266.imageshack.us/imgxyz/952/ltsce5.th.jpg as the thumb, the full size is therefore
-	 http://img266.imageshack.us/imgxyz/952/ltsce5.jpg
-	 and so on through the list 
-	 http://i282.photobucket.com/albums/kk241/Eudemon_Randy/o0550040011071339949.jpg
-	 http://i1025.photobucket.com/albums/y311/LOEternal/anime%20pictures/01-4.jpg
+		The href link is not to a image but back to the image host page, where the full sized is returned. since we know the
+		thumbnail image location its generally easy to build the correct link to the full-size for us to use.  
+		Take the thumbnail image and based on the host strip out the thumb indicator, for example imageshack will have
+		http://img266.imageshack.us/imgxyz/952/ltsce5.th.jpg as the thumb, the full size is therefore
+		http://img266.imageshack.us/imgxyz/952/ltsce5.jpg
+		and so on through the list 
+		http://i282.photobucket.com/albums/kk241/xyz/o0550040011071339949.jpg
+		http://i1025.photobucket.com/albums/y311/xyz/abc/01-4.jpg
 	 */
 	if (stripos($image['domain_url'], 'imageshack') !== false && preg_match('~(.*?)\.(?:th\.|)(png|gif|jp(e)?g|bmp)$~is' . ($context['utf8'] ? 'u' : ''), $image[4], $out)) 
 		$out = (substr($out[1], 0, -1) == '.') ? $out[1] . $out[2] : $out[1] . '.' . $out[2];
@@ -213,13 +212,14 @@ function hs4smf_fix_link($image)
 	} 
 	elseif (stripos($image['domain_url'], 'xs') !== false && preg_match('~(.*?)\.(?:jpg.xs\.|)(png|gif|jp(e)?g|bmp)$~is' . ($context['utf8'] ? 'u' : ''), $image[4], $out)) 
 		$out = $out[1] . '.' . $out[2];
-	elseif (stripos($image['domain_url'], 'postimage') !== false) 
+	elseif (stripos($image['domain_url'], 'postimage') !== false && !empty($image[2]))
 	{
 		// postimage.org appears to set the full image name based on the user agent, different agents generate different image names ...
 		$out = $image[2];
 		ini_set('user_agent', $_SERVER['HTTP_USER_AGENT']);
-		$page = file_get_contents($image[2]);
-		if ($page !== false && preg_match('~<img src=\'(.*?\.(png|gif|jp(e)?g|bmp))\'~is', $page, $link)) $out = $link[1];
+		$page = @file_get_contents($image[2]);
+		if ($page !== false && preg_match('~<img src=\'(.*?\.(png|gif|jp(e)?g|bmp))\'~is', $page, $link))
+			$out = $link[1];
 	} 
 	elseif (stripos($image['domain_url'], 'ggpht') !== false && preg_match('~(.*?)/(?:s\d{3,4}|)/([^/]*?)\.(png|gif|jp(e)?g|bmp)$~is' . ($context['utf8'] ? 'u' : ''), $image[4], $out)) 
 		$out = $out[1] . '/' . $out[2] . '.' . $out[3];
@@ -237,9 +237,9 @@ function hs4wsmf_anchor_link_prepare($str, $slidegroup)
 	global $settings;
 
 	// prepare the link for highslide effect by adding in the class and onclick events
-	if (preg_match('~href=[\'"][^"\']+\.(?:gif|jpe|jpg|jpeg|png)~i', $str)) 
+	if (preg_match('~href=[\'"][^"\']+\.(?:gif|jpe|jpg|jpeg|png|bmp)~i', $str)) 
 	{
-		if (stripos($str, "highslide") == false && stripos($str, "onclick") === false) 
+		if (stripos($str, '"highslide') === false && stripos($str, 'onclick="') === false)
 		{
 			// its an image that has not been previously marked for highslide
 			$settings['hs4smf_img_count'] = $settings['hs4smf_img_count'] + 1;
