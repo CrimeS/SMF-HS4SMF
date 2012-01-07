@@ -1,5 +1,16 @@
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
+[b]0.8 - 6 January 2012[/b]
+o + Updated highslide to 4.1.13
+o + Moved HS language strings to language file from js files
+o + Moved hs4smf language strings to own file instead of modifications.language
+o + Added option to count highslide views in a message as a gallery view
+o + Added license BSD 2 clause
+o ! Fixed error with captionOverlay opacity
+o ! Small updates to options panel layout
+o ! Some code cleanup, needs more :X
+
 [b]0.7 - 21 March 2011[/b]
+o + minor updates for 2.0 Gold (0.7a)
 o ! fixed issue where aeva links were being hidden in a portal block
 o ! fixed issue where the aspect ratio was being changed when the aeva option was enabled
 o + Improved the caption logic, it will now show the aeva caption text when available on a gallery image and show the caption as defined in the admin panel for other images (attachments, in line image, etc).

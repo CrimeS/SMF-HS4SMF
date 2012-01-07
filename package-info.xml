@@ -4,25 +4,23 @@
 	<name>Highslide 4 SMF</name>
 	<id>spuds:HS4SMF</id>
 	<type>modification</type>
-	<version>0.7a</version>
-	
+	<version>0.8</version>
+
 	<install for="2.0 - 2.0.99">
 		<database>add_settings.php</database>
 		<code>add_remove_hooks.php</code>
 		<modification>install.xml</modification>
-		<modification>language.xml</modification>
-		<modification>language-utf8.xml</modification>
 		<readme type="file" parsebbc="true">readme.txt</readme>
-		<require-file name="hs4smf-Subs.php" destination="$sourcedir" />
-		<require-dir name="hs4smf" destination="$themedir" />
-		<redirect url="index.php?action=admin;area=modsettings;sa=hs4smf" timeout="10000">redirect.txt</redirect>
+		<require-file name="hs4smf-Subs.php" destination="$sourcedir">The primary functions file</require-file>
+		<require-file name="hs4smf.english.php" destination="$languagedir">The language strings</require-file>
+		<require-dir name="hs4smf" destination="$themedir">The highslide js and css files</require-dir>
+		<redirect url="index.php?action=admin;area=modsettings;sa=hs4smf" timeout="5000">redirect.txt</redirect>
 	</install>
-	
+
 	<uninstall for="2.0 - 2.0.99">
 		<code>add_remove_hooks.php</code>
 		<modification reverse="true">install.xml</modification>
-		<modification reverse="true">language.xml</modification>
-		<modification reverse="true">language-utf8.xml</modification>
+		<remove-file name="$languagedir/hs4smf.english.php" />
 		<remove-file name="$sourcedir/hs4smf-Subs.php" />
 		<remove-dir name="$themedir/hs4smf" />
 	</uninstall>

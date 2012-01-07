@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<!-- --------------------------------------------------------------------------
+  package "HS4SMF" Mod for Simple Machines Forum (SMF) V2.0
+  author Spuds
+  copyright (c) 2011 Spuds
+  license license.txt (included with package) BSD
+--------------------------------------------------------------------------- -->
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 	<id>spuds:HS_4_SMF</id>
-	<version>0.7a</version>
-	
+
 <file name="$sourcedir/Aeva-Subs.php" error="skip">
 		<operation>
 			<search position="after"><![CDATA[	if ($add_to_headers || (ob_get_length() === 0))]]></search>
-			<add><![CDATA[	// HS4SMF 
-	if ($use_lightbox && !empty($modSettings['hs4smf_enabled']) && !empty($modSettings['hs4smf_aeva_format'])) 
+			<add><![CDATA[	// HS4SMF
+	if ($use_lightbox && !empty($modSettings['hs4smf_enabled']) && !empty($modSettings['hs4smf_aeva_format']))
 	{
 		// avea is using lightbox, so add our extra settings and change what was already there
 		aeva_initGallery_hs4smf($lightbox);
-		
+
 		// some headers to work with the various slideshow controls
 		$lightbox .= hs4smf_prepare_extra_headers();
 	}
-	
+
 ]]></add>
 		</operation>
-		
+
 		<operation>
 			<search position="after"><![CDATA[	$lightbox = (empty($_GET['action']) || $_GET['action'] != 'media' ? ']]></search>
 			<add><![CDATA[	// HS4SMF only load Aeva lightbox js & css controls when in the gallery
@@ -29,15 +34,15 @@
 ]]></add>
 		</operation>
 </file>
-	
+
 <file name="$sourcedir/Subs.php">
 	<operation>
 		<search position="before"><![CDATA[	// Cache the output if it took some time...]]></search>
 		<add><![CDATA[
 	// HS4SMF, call the highslide function on this message, but not on signature, stats or when in the editor
-	if((empty($cache_id) || substr($cache_id, 0, 3) != 'sig') && $context['current_action'] != 'stats' && $context['current_action'] != 'post' && $context['current_action'] != 'jseditor') 
+	if((empty($cache_id) || substr($cache_id, 0, 3) != 'sig') && $context['current_action'] != 'stats' && $context['current_action'] != 'post' && $context['current_action'] != 'jseditor')
 		hs4smf($message, $cache_id);
-		
+
 ]]></add>
 	</operation>
 	<operation>
@@ -45,12 +50,12 @@
 	// Resize avatars the fancy, but non-GD requiring way.]]></search>
 		<add><![CDATA[
 	// HS4SMF enable header
-	if (!empty($modSettings['hs4smf_enabled'])) 
+	if (!empty($modSettings['hs4smf_enabled']))
 		$context['html_headers'] .= hs4smf_prepare_header();
 ]]></add>
 	</operation>
 </file>
-	
+
 <file name="$themedir/Display.template.php">
 	<operation error="ignore">
 		<search position="replace"><![CDATA[				if ($attachment['is_image'])
@@ -65,7 +70,7 @@
 ]]></search>
 		<add><![CDATA[				if ($attachment['is_image'])
 				{
-					if ($attachment['thumbnail']['has_thumb'] && !empty($modSettings['hs4smf_enabled']) && !empty($modSettings['hs4smf_enableonattachments'])) 
+					if ($attachment['thumbnail']['has_thumb'] && !empty($modSettings['hs4smf_enabled']) && !empty($modSettings['hs4smf_enableonattachments']))
 					{
 						$settings['hs4smf_img_count'] = (isset($settings['hs4smf_img_count'])) ? $settings['hs4smf_img_count'] + 1 : 1;
 						$slidegroup = hs4smf_get_slidegroup($message['id']);
@@ -81,30 +86,30 @@
 				}
 				]]></add>
 	</operation>
-	
+
 	<operation>
 		<search position="after"><![CDATA[			// If we had unapproved attachments clean up.]]></search>
 		<add><![CDATA[
 			// HS4SMF decide which slidegroup the attacments belong in
-			if (isset($modSettings['hs4smf_enableonattachments']) && isset($modSettings['hs4smf_enabled'])) 
+			if (isset($modSettings['hs4smf_enableonattachments']) && isset($modSettings['hs4smf_enabled']))
 				hs4smf_track_slidegroup($message['id']);
-			
+
 ]]></add>
 	</operation>
 </file>
-	
+
 <file name="$themedir/index.template.php">
 	<operation>
 		<search position="before"><![CDATA[function template_html_below()
 {
 	global $context, $settings, $options, $scripturl, $txt, $modSettings;]]></search>
 		<add><![CDATA[
-	
+
 	// HS4SMF enable footer
-	if (!empty($modSettings['hs4smf_enabled'])) 
+	if (!empty($modSettings['hs4smf_enabled']))
 		echo hs4smf_prepare_footer();
 	]]></add>
 	</operation>
 </file>
-	
+
 </modification>

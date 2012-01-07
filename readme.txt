@@ -1,26 +1,25 @@
 [hr]
-[center][size=16pt][b]Highslide 4 SMF Version 0.7a[/b][/size]
+[center][size=16pt][b]Highslide 4 SMF Version 0.8[/b][/size]
 [url=http://custom.simplemachines.org/mods/index.php?action=search;author=11359][b]By Spuds[/b][/url]
 [url=http://custom.simplemachines.org/mods/index.php?mod=2518][b]Link to Mod[/b][/url]
 [/center]
 [hr]
 
+[color=blue][b][size=12pt][u]License[/u][/size][/b][/color]
+This modification is released under a BSD license, a copy of it with its provisions is included with the package.
+
 [color=blue][b][size=12pt][u]Introduction[/u][/size][/b][/color]
 This modification adds the highslide lightbox effect to images and attachments in your post.
 ===
-Highslide JS is licensed under a Creative Commons Attribution-Non Commercial 2.5 License. This means you must get the author's permission to use Highslide JS on commercial websites. [url=http://highslide.com/#licence]Highslide[/url]
-
-[color=blue][b][size=12pt][u]Original mods[/u][/size][/b][/color]
-Based on the mods and ideas in :
-- "Integrate Lightbox" (by karlbenson - [url=http://custom.simplemachines.org/mods/index.php?mod=1019]http://custom.simplemachines.org[/url]) 
-- "Highslide Image Viewer" (by digger - [url=http://custom.simplemachines.org/mods/index.php?mod=1450]http://custom.simplemachines.org[/url]) 
+Highslide JS is licensed under a Creative Commons Attribution-Non Commercial 2.5 License. This means you must get the author's permission and a commerical license to use Highslide JS on a commercial or governmental website, web application or SaaS project.  [url=http://highslide.com/#licence]Highslide[/url]
 
 [color=blue][b][size=12pt][u]Features[/u][/size][/b][/color]
-o Shows a full-size image in a nice picture frame when the user clicks a thumbnail or attachment
+o Expands a thumbnail (attachment or in-line image) in to a full-size image in a picture frame when clicked
 o Auto size images to fit browser window, with option to expand to full size with scrollbars
-o Slideshow for images on page
+o Slideshow for images on page, grouping by topic or by individual messages in the topic
 o Prev/Next with arrow keys
-o Works for thumbnails from Postimage, Imageshack, Photobucket, iPicture, Radikal, Keep4u, Xs and Fotosik. (Some support ported from digger's highslide viewer mod)
+o Works for thumbnails from Postimage, Imageshack, Photobucket, iPicture, Radikal, Keep4u, Xs and Fotosik.
+o Auto attaches to all images and optionally attachments.  Can override an image from sliding by using the alt="ns" option to prevent specified images from highsliding, use it as [nobbc][img alt="ns"]your image[/img][/nobbc]
 
 There are many admin settings available with this mod, go to admin - configuration - modification settings - Highslide
 o Disable/enable the mod
@@ -55,10 +54,18 @@ This mod is compatible with SMF 2.0 only.
 Please use the HS4SMF modification thread for support with this modification.
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
-[b]0.7a - 12 June 2011[/b]
-o + Minor updates for 2.0 Gold
+[b]0.8 - 6 January 2012[/b]
+o + Updated highslide to 4.1.13
+o + Moved HS language strings to language file from js files
+o + Moved hs4smf language strings to own file instead of modifications.language
+o + Added option to count highslide views in a message as a gallery view
+o + Added license BSD 2 clause
+o ! Fixed error with captionOverlay opacity
+o ! Small updates to options panel layout
+o ! Some code cleanup, needs more :X
 
 [b]0.7 - 21 March 2011[/b]
+o + Minor updates for 2.0 Gold
 o ! fixed issue where aeva links were being hidden in a portal block
 o ! fixed issue where the aspect ratio was being changed when the aeva option was enabled
 o + Improved the caption logic, it will now show the aeva caption text when available on a gallery image and show the caption as defined in the admin panel for other images (attachments, in line image, etc).

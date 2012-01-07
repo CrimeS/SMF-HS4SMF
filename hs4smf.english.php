@@ -1,14 +1,4 @@
-<?xml version="1.0"?>
-<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
-<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
-<id>spuds:ILA</id>
-	
-<file name="$languagedir/Modifications.english-utf8.php" error="skip">
-	<operation>
-		<search position="end" />
-		<add><![CDATA[
-		
-//Begin HS4SMF changes
+<?php
 $txt['hs4smf_none'] = 'none';
 $txt['hs4smf_inheading'] = 'In Heading ';
 $txt['hs4smf_incaption'] = 'In Caption';
@@ -54,11 +44,15 @@ $txt['mods_cat_modifications_hs4smf'] = 'Highslide';
 $txt['hs4smf'] = 'Highslide 4 SMF';
 $txt['hs4smf_desc'] = 'This modification allows you to enable the highslide lightbox effect to images and attachments in your forum.';
 $txt['hs4smf_title'] = 'Highslide 4 SMF';
-$txt['hs4smf_enabled'] = 'Enable the Highslide 4 SMF Modification.<br /><br />Highslide JS is licensed under a Creative Commons Attribution-Non Commercial 2.5 License. This means you must get the author\'s permission to use Highslide JS on commercial websites.<br /><br />Enabling highslide means that you are agreeing to the <a href=http://highslide.com/#licence>Highslide License</a> terms';
+$txt['hs4smf_enabled'] = 'Enable the Highslide 4 SMF Modification';
+$txt['hs4smf_enabled_desc'] = 'Highslide JS is licensed under a Creative Commons Attribution-Non Commercial 2.5 License. This means you must get the author\'s permission and a commerical license to use Highslide JS on a commercial or governmental website, web application or SaaS project.<br /><br />Enabling highslide means that you are agreeing to the <a href=http://highslide.com/#licence>Highslide License</a> terms';
+$txt['hs4smf_settings'] = 'Highslide Settings';
 $txt['hs4smf_enablecoral'] = 'Use Coral CDN as JS/CSS source';
+$txt['hs4smf_enablecoral_desc'] = 'This will use the <a href="http://www.coralcdn.org/">Coral CDN</a> for serving your sites highslide library.  The Coral service is experimental and this option is just for testing at this time';
 $txt['hs4smf_enablegalleryfade'] = 'Enable Fade In/Out transition';
 $txt['hs4smf_enablecredits'] = 'Enable Highslide Credits';
 $txt['hs4smf_enableonattachments'] = 'Enable Highslide on Attachments';
+$txt['hs4smf_slideshowsettings'] = 'Slideshow Settings';
 $txt['hs4smf_slideshowcontrols'] = 'Use graphical slideshow controls';
 $txt['hs4smf_slideshowmouse'] = 'Hide slideshow controls on mouse out';
 $txt['hs4smf_slidebackgroundcolor'] = 'Overall background color for the slide frame (6 digit hex)';
@@ -71,6 +65,7 @@ $txt['hs4smf_nudgex'] = 'Adjust the slideshow control position right/left';
 $txt['hs4smf_nudgey'] = 'Adjust the slideshow control position up/down';
 $txt['hs4smf_slideshowrepeat'] = 'Loop Slideshow';
 $txt['hs4smf_slideshowgrouping'] = 'Enable smart slideshow grouping (image grouping by message instead of topic)';
+$txt['hs4smf_appearancesettings'] = 'Highslide Appearance';
 $txt['hs4smf_appearance'] = 'Define how the frame around the highslided image appears';
 $txt['hs4smf_dimmingopacity'] = 'How dark to make the background page when highsliding an image';
 $txt['hs4smf_headingsource'] = 'Source for the text in the heading';
@@ -82,9 +77,30 @@ $txt['hs4smf_sourcemouse'] = 'Hide heading and caption on mouse out';
 $txt['hs4smf_slideshownumbers'] = 'Show Image x of y in the slideshow';
 $txt['hs4smf_slidecontrolsalways'] = 'Always show slide control (even on single images)';
 $txt['hs4smf_aeva_format'] = 'Add additional settings in the Aeva Gallery to provide similar lightbox formatting';
-//End HS4SMF changes
-]]></add>
-	</operation>
-</file>
+$txt['hs4smf_gallerycounter'] = 'Count highsliding an [smg] image in a message as a gallery view';
 
-</modification>
+$txt['cssDirection'] = 'ltr';
+$txt['loadingText'] = 'Loading...';
+$txt['loadingTitle'] = 'Click to cancel';
+$txt['focusTitle'] = 'Click to bring to front';
+$txt['fullExpandTitle'] = 'Expand to actual size';
+$txt['creditsText'] = 'Powered by <i>Highslide JS</i>';
+$txt['creditsTitle'] = 'Go to the Highslide JS homepage';
+$txt['previousText'] = 'Previous';
+$txt['nextText'] = 'Next';
+$txt['moveText'] = 'Move';
+$txt['closeText'] = 'Close';
+$txt['closeTitle'] = 'Close (esc)';
+$txt['resizeTitle'] = 'Resize';
+$txt['playText'] = 'Play';
+$txt['playTitle'] = 'Play slideshow (spacebar)';
+$txt['pauseText'] = 'Pause';
+$txt['pauseTitle'] = 'Pause slideshow (spacebar)';
+$txt['previousTitle'] = 'Previous (arrow left)';
+$txt['nextTitle'] = 'Next (arrow right)';
+$txt['moveTitle'] = 'Move';
+$txt['fullExpandText'] = 'Full size';
+$txt['imagenumber'] = 'Image %1 of %2';
+$txt['restoreTitle'] = 'Click to close image, click and drag to move. Use arrow keys for next and previous.';
+
+?>
