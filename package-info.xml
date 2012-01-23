@@ -4,7 +4,7 @@
 	<name>Highslide 4 SMF</name>
 	<id>spuds:HS4SMF</id>
 	<type>modification</type>
-	<version>0.8</version>
+	<version>0.8.1</version>
 
 	<install for="2.0 - 2.0.99">
 		<database>add_settings.php</database>

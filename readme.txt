@@ -54,6 +54,10 @@ This mod is compatible with SMF 2.0 only.
 Please use the HS4SMF modification thread for support with this modification.
 
 [color=blue][b][size=12pt][u]Changelog[/u][/size][/b][/color]
+[b]0.8.1 - 22 January 2012[/b]
+o ! Fixed minor compatibility issue with ILA
+o ! Some more code cleanup, still needs more :'/
+
 [b]0.8 - 6 January 2012[/b]
 o + Updated highslide to 4.1.13
 o + Moved HS language strings to language file from js files

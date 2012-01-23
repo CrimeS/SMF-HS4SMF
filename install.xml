@@ -72,7 +72,7 @@
 				{
 					if ($attachment['thumbnail']['has_thumb'] && !empty($modSettings['hs4smf_enabled']) && !empty($modSettings['hs4smf_enableonattachments']))
 					{
-						$settings['hs4smf_img_count'] = (isset($settings['hs4smf_img_count'])) ? $settings['hs4smf_img_count'] + 1 : 1;
+						$context['hs4smf_img_count'] = (isset($context['hs4smf_img_count'])) ? $context['hs4smf_img_count'] + 1 : 1;
 						$slidegroup = hs4smf_get_slidegroup($message['id']);
 						echo '
 										<a href="', $attachment['href'], ';image" id="link_', $attachment['id'], '" class="highslide" onclick="return hs.expand(this, ' . $slidegroup . ')"><img src="', $attachment['thumbnail']['href'], '" alt="' , $attachment['name'] , '" id="thumb_', $attachment['id'], '" border="0" /></a><br />';

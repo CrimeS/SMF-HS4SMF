@@ -23,7 +23,7 @@ if (!defined('SMF'))
 /**
  * 	- Main traffic cop for the rest for the function.  Searches message for all img tags and
  * 	  will wrap them in the correct anchor tag to allow the Highslide javascript function to find them
- * 	- $settings['hs4smf_img_count'] keeps track of how many images are found for each area ... aeva, message, attachment
+ * 	- $context['hs4smf_img_count'] keeps track of how many images are found for each area ... aeva, message, attachment
  *
  * @global type $context
  * @global type $modSettings
@@ -41,7 +41,7 @@ function hs4smf(&$message, $id_msg = -1)
 		return;
 
 	// init some thangs
-	$settings['hs4smf_img_count'] = 0;
+	$context['hs4smf_img_count'] = 0;
 	$image_hosters = array('imageshack', 'photobucket', 'ipicture', 'radikal', 'keep4u', 'fotosik', 'xs', 'postimage', 'ggpht');
 	$regex = '~(?P<a_tag><a href="(?P<a_link>[^"]*?)"(?:[^>]*?)>|)(?P<img_tag><img src=[""' . '\'](?P<img_src>.*?)[""' . '\'](?:[^>]*?)>)(?:</a>|)~si';
 
@@ -60,13 +60,13 @@ function hs4smf(&$message, $id_msg = -1)
 				$message = str_replace('onclick="return hs.expand(this, slideOptions)', 'onclick="return hs.expand(this, {slideshowGroup:\'fullgroup\'})', $message);
 
 			// keep track of how many images we are sliding in this message
-			$settings['hs4smf_img_count'] = $smg_count;
+			$context['hs4smf_img_count'] = $smg_count;
 			hs4smf_track_slidegroup($id_msg);
 		}
 	}
 
 	// Now Find all the images in this message, be they linked or not, return a numbered and named array for use
-	$settings['hs4smf_img_count'] = 0;
+	$context['hs4smf_img_count'] = 0;
 	$images = array();
 	if (preg_match_all($regex, $message, $images, PREG_SET_ORDER))
 	{
@@ -221,7 +221,7 @@ function hs4smf_fix_link($image)
  */
 function hs4wsmf_anchor_link_prepare($str, $slidegroup)
 {
-	global $settings;
+	global $context;
 
 	// prepare the link for highslide effect by adding in the class and onclick events
 	if (preg_match('~href=[\'"][^"\']+\.(?:gif|jpe|jpg|jpeg|png|bmp)~i', $str))
@@ -229,7 +229,7 @@ function hs4wsmf_anchor_link_prepare($str, $slidegroup)
 		if (stripos($str, '"highslide') === false && stripos($str, 'onclick="') === false)
 		{
 			// its an image that has not been previously marked for highslide
-			$settings['hs4smf_img_count'] = $settings['hs4smf_img_count'] + 1;
+			$context['hs4smf_img_count'] = $context['hs4smf_img_count'] + 1;
 			if (false !== strpos(strtolower($str), 'class='))
 			{
 				// add highslide into an existing class structure
@@ -270,34 +270,34 @@ function hs4smf_get_slidegroup($id_msg)
 
 /**
  * 	- keeps track of the total number of found images in each slideshow group
- * 	- expects $settings['hs4smf_img_count'] to be updated to reflect the count of images found
+ * 	- expects $context['hs4smf_img_count'] to be updated to reflect the count of images found
  * 	  for each area, aeva, message body and attachments.
  *
- * @global type $settings
+ * @global type $context
  * @global type $modSettings
  * @param type $id_msg
  */
 function hs4smf_track_slidegroup($id_msg)
 {
 	// sets the array key if it has not been set or updates the key if already set and the new value is greater
-	global $settings, $modSettings;
+	global $modSettings, $context;
 
 	// do the slideshow groupings
 	if (isset($modSettings['hs4smf_slideshowgrouping']))
 	{
 		// create smart slide groups for this message/topic, add this group to our group string for use in building the correct javascript
-		if (isset($settings['hs4smf_slideshow_group'][$id_msg]))
-			$settings['hs4smf_slideshow_group'][$id_msg]+= $settings['hs4smf_img_count'];
-		elseif (!isset($settings['hs4smf_slideshow_group'][$id_msg]))
-			$settings['hs4smf_slideshow_group'][$id_msg] = $settings['hs4smf_img_count'];
+		if (isset($context['hs4smf_slideshow_group'][$id_msg]))
+			$context['hs4smf_slideshow_group'][$id_msg] += $context['hs4smf_img_count'];
+		elseif (!isset($context['hs4smf_slideshow_group'][$id_msg]))
+			$context['hs4smf_slideshow_group'][$id_msg] = $context['hs4smf_img_count'];
 	}
 	else
 	{
 		// just a single group of all images in this topic, turn on the overlay controls if we have more than 1 image in the topic
-		if (isset($settings['hs4smf_slideshow_group']['fullgroup']))
-			$settings['hs4smf_slideshow_group']['fullgroup']+= $settings['hs4smf_img_count'];
-		elseif (!isset($settings['hs4smf_slideshow_group']['fullgroup']))
-			$settings['hs4smf_slideshow_group']['fullgroup'] = $settings['hs4smf_img_count'];
+		if (isset($context['hs4smf_slideshow_group']['fullgroup']))
+			$context['hs4smf_slideshow_group']['fullgroup'] += $context['hs4smf_img_count'];
+		elseif (!isset($context['hs4smf_slideshow_group']['fullgroup']))
+			$context['hs4smf_slideshow_group']['fullgroup'] = $context['hs4smf_img_count'];
 	}
 }
 
@@ -465,8 +465,8 @@ function hs4smf_prepare_footer()
 		$footer .= aeva_initLightbox_hs4smf();
 
 	// clean up for the next pass
-	unset($settings['hs4smf_slideshow']);
-	unset($settings['hs4smf_slideshow_group']);
+	unset($context['hs4smf_slideshow']);
+	unset($context['hs4smf_slideshow_group']);
 
 	// return this beast
 	return $footer;
@@ -698,7 +698,7 @@ function hs4smf_control_wrapper()
 
 function hs4smf_slidshow_controls()
 {
-	global $txt, $modSettings, $settings;
+	global $txt, $modSettings, $settings, $context;
 
 	loadLanguage('hs4smf');
 	$footer = '';
@@ -728,9 +728,9 @@ function hs4smf_slidshow_controls()
 		}
 
 		// create slidshow groups for each message (that has images) in the post ....
-		if (isset($settings['hs4smf_slideshow_group']))
+		if (isset($context['hs4smf_slideshow_group']))
 		{
-			foreach ($settings['hs4smf_slideshow_group'] as $slide_group => $slide_count)
+			foreach ($context['hs4smf_slideshow_group'] as $slide_group => $slide_count)
 			{
 				// start of this slide group
 				$footer .= "if (hs.addSlideshow) hs.addSlideshow({";
@@ -744,7 +744,7 @@ function hs4smf_slidshow_controls()
 				$footer .= (!empty($modSettings['hs4smf_slideshowrepeat'])) ? "repeat: true," : "repeat: false,";
 
 				// if this group only has 1 image then don't show the controls unless we have been told to
-				$footer .= ($slide_count > 1 || (isset($modSettings['hs4smf_slidecontrolsalways']) && !empty($modSettings['hs4smf_slidecontrolsalways']))) ? "useControls: true," : "useControls: false,";
+				$footer .= ($slide_count > 1 || !empty($modSettings['hs4smf_slidecontrolsalways'])) ? "useControls: true," : "useControls: false,";
 				$footer .= "fixedControls: 'fit',";
 
 				// how should the overlay controls appear
@@ -1177,7 +1177,7 @@ function aeva_initGallery_hs4smf(&$lightbox)
 	global $settings, $modSettings, $sourcedir, $context;
 
 	include_once($sourcedir . '/Aeva-Subs.php');
-	$settings['hs4smf_slideshow_group']['aeva'] = 2;
+	$context['hs4smf_slideshow_group']['aeva'] = 2;
 
 	// slideshow grouping in messages, remove aeva's and add in hs4smf's
 	if ($context['current_action'] == 'media' && !empty($modSettings['hs4smf_enabled']))
