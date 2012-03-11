@@ -1056,8 +1056,8 @@ nextTitle:\'' . $txt['nextTitle'] . '\',
 moveTitle:\'' . $txt['moveTitle'] . '\',
 fullExpandText:\'' . $txt['fullExpandText'] . '\',
 number:\'' . $txt['imagenumber'] . '\',
-restoreTitle:\'' . $txt['restoreTitle'] . '\',
-};';
+restoreTitle:\'' . $txt['restoreTitle'] . '\'
+};' . "\n";
 
 	return $footer;
 
