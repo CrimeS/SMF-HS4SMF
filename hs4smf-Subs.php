@@ -42,7 +42,7 @@ function hs4smf(&$message, $id_msg = -1)
 
 	// init some thangs
 	$context['hs4smf_img_count'] = 0;
-	$image_hosters = array('imageshack', 'photobucket', 'ipicture', 'radikal', 'keep4u', 'fotosik', 'xs', 'postimage', 'ggpht');
+	$image_hosters = array('imageshack', 'photobucket', 'ipicture', 'radikal', 'keep4u', 'fotosik', 'xs', 'postimage', 'ggpht', 'flickr', 'smugmug');
 	$regex = '~(?P<a_tag><a href="(?P<a_link>[^"]*?)"(?:[^>]*?)>|)(?P<img_tag><img src=[""' . '\'](?P<img_src>.*?)[""' . '\'](?:[^>]*?)>)(?:</a>|)~si';
 
 	// Do we have Aeva installed, if so lets move the [smg embedded images in to our slidegroups
@@ -82,6 +82,8 @@ function hs4smf(&$message, $id_msg = -1)
 				continue;
 			elseif (stripos($image['img_tag'], 'alt="&quot;ns&quot;"'))
 				continue;
+			elseif (stripos($image['img_tag'], 'alt="ns"'))
+				continue;
 			elseif (stripos($image['img_tag'], 'type=avatar'))
 				continue;
 			elseif (stripos($image['img_tag'], 'class="icon"'))
@@ -102,7 +104,6 @@ function hs4smf(&$message, $id_msg = -1)
 			}
 			else
 				$image['replacement'] = $image[0];
-
 			// we have special processing needs for image hosting sites in order to find the real image to expand, so if we have a valid domain
 			$domain = array();
 			if (preg_match('~^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$~i', $image['a_link']))
@@ -202,6 +203,10 @@ function hs4smf_fix_link($image)
 	}
 	elseif (stripos($image['domain_url'], 'ggpht') !== false && preg_match('~(.*?)/(?:s\d{3,4}|)/([^/]*?)\.(png|gif|jp(e)?g|bmp)$~is' . ($context['utf8'] ? 'u' : ''), $image[4], $out))
 		$out = $out[1] . '/' . $out[2] . '.' . $out[3];
+	elseif (stripos($image['domain_url'], 'flickr') !== false && preg_match('~(.*?)(?:_t\.)(png|gif|jp(e)?g|bmp)$~is' . ($context['utf8'] ? 'u' : ''), $image[4], $out))
+		$out = $out[1] . '_b.' . $out[2];
+	elseif (stripos($image['domain_url'], 'smugmug') !== false && preg_match('~(.*?)(?:\/S\/)(.*?)(?:-S)\.(png|gif|jp(e)?g|bmp)$~is' . ($context['utf8'] ? 'u' : ''), $image[4], $out))
+		$out = $out[1] . '/O/' . $out[2] . '.' . $out[3];
 	else
 		return $image;
 
