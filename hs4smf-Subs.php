@@ -227,7 +227,7 @@ function hs4smf_fix_link($image)
 function hs4wsmf_anchor_link_prepare($str, $slidegroup)
 {
 	global $context;
-
+	
 	// prepare the link for highslide effect by adding in the class and onclick events
 	if (preg_match('~href=[\'"][^"\']+\.(?:gif|jpe|jpg|jpeg|png|bmp)~i', $str))
 	{
@@ -287,6 +287,9 @@ function hs4smf_track_slidegroup($id_msg)
 	// sets the array key if it has not been set or updates the key if already set and the new value is greater
 	global $modSettings, $context;
 
+	// this should not happen, but here we find ourselfs
+	$context['hs4smf_img_count'] = isset($context['hs4smf_img_count']) ? $context['hs4smf_img_count'] : 0;
+	
 	// do the slideshow groupings
 	if (isset($modSettings['hs4smf_slideshowgrouping']))
 	{
