@@ -21,13 +21,11 @@ if (!defined('SMF'))
 	die('Hacking Attempt...');
 
 /**
- * 	- Main traffic cop for the rest for the function.  Searches message for all img tags and
- * 	  will wrap them in the correct anchor tag to allow the Highslide javascript function to find them
- * 	- $context['hs4smf_img_count'] keeps track of how many images are found for each area ... aeva, message, attachment
+ * Main traffic cop for the rest for the function.
+ * - Searches message for all img tags and will wrap them in the correct anchor tag to allow the
+ *	 Highslide javascript function to find them
+ * - $context['hs4smf_img_count'] keeps track of how many images are found for each area ... aeva, message, attachment
  *
- * @global type $context
- * @global type $modSettings
- * @global type $settings
  * @param type $message
  * @param type $id_msg
  * @return type
@@ -149,12 +147,10 @@ function hs4smf(&$message, $id_msg = -1)
 }
 
 /**
- * 	- Fixes the image link so they point to the full sized image instead of pointing to the image
- * 	  hosting site, this allows them to expand in place and not redirect.
+ * 	Fixes the image link so they point to the full sized image instead of pointing to the image
+ * 	hosting site, this allows them to expand in place and not redirect.
  *
- * @global type $context
- * @global type $message
- * @param type $image
+ * @param string $image
  * @return string
  */
 function hs4smf_fix_link($image)
@@ -217,17 +213,16 @@ function hs4smf_fix_link($image)
 }
 
 /**
- * - manipulates the anchor tag to update the class and onclick events needed for Highslide
+ * Manipulates the anchor tag to update the class and onclick events needed for Highslide
  *
- * @global type $settings
- * @param type $str
- * @param type $slidegroup
+ * @param string $str
+ * @param int $slidegroup
  * @return string
  */
 function hs4wsmf_anchor_link_prepare($str, $slidegroup)
 {
 	global $context;
-	
+
 	// prepare the link for highslide effect by adding in the class and onclick events
 	if (preg_match('~href=[\'"][^"\']+\.(?:gif|jpe|jpg|jpeg|png|bmp)~i', $str))
 	{
@@ -254,9 +249,8 @@ function hs4wsmf_anchor_link_prepare($str, $slidegroup)
 }
 
 /**
- * - simply returns the slideshow group name for a given setup
+ * Simply returns the slideshow group name for a given setup
  *
- * @global type $modSettings
  * @param type $id_msg
  * @return string
  */
@@ -274,13 +268,11 @@ function hs4smf_get_slidegroup($id_msg)
 }
 
 /**
- * 	- keeps track of the total number of found images in each slideshow group
+ * 	Keeps track of the total number of found images in each slideshow group
  * 	- expects $context['hs4smf_img_count'] to be updated to reflect the count of images found
  * 	  for each area, aeva, message body and attachments.
  *
- * @global type $context
- * @global type $modSettings
- * @param type $id_msg
+ * @param int $id_msg
  */
 function hs4smf_track_slidegroup($id_msg)
 {
@@ -289,7 +281,7 @@ function hs4smf_track_slidegroup($id_msg)
 
 	// this should not happen, but here we find ourselfs
 	$context['hs4smf_img_count'] = isset($context['hs4smf_img_count']) ? $context['hs4smf_img_count'] : 0;
-	
+
 	// do the slideshow groupings
 	if (isset($modSettings['hs4smf_slideshowgrouping']))
 	{
@@ -310,10 +302,8 @@ function hs4smf_track_slidegroup($id_msg)
 }
 
 /**
- * - Some color options just need extra style tweaks to make sure they work
+ * Some color options just need extra style tweaks to make sure they work
  *
- * @global string $modSettings
- * @global type $settings
  * @return string
  */
 function hs4smf_prepare_extra_headers()
@@ -351,11 +341,8 @@ function hs4smf_prepare_extra_headers()
 }
 
 /**
- * - poops out the header with the correct css and language css files for the themes.
+ * Poops out the header with the correct css and language css files for the themes.
  *
- * @global type $modSettings
- * @global type $settings
- * @global type $context
  * @param type $force
  * @return type
  */
@@ -390,14 +377,10 @@ function hs4smf_prepare_header($force = false)
 }
 
 /**
- * 	- creates the all important javascipt options for Highslide.  Builds the option settings
- * 	  based on the options set in the admin area.  Will do some smart corrections to help avoid
- * 	  users choosing conflicting options.
+ * Creates the all important javascipt options for Highslide.
+ *  - Builds the option settings based on the options set in the admin area.
+ *  - Will do some smart corrections to help avoid users choosing conflicting options.
  *
- * @global type $modSettings
- * @global type $settings
- * @global type $context
- * @global type $amSettings
  * @return type
  */
 function hs4smf_prepare_footer()
@@ -480,6 +463,11 @@ function hs4smf_prepare_footer()
 	return $footer;
 }
 
+/**
+ *
+ * Set the text for the image caption in the popup
+ * @return string
+ */
 function hs4smf_caption_text()
 {
 	global $modSettings, $context;
@@ -509,6 +497,11 @@ function hs4smf_caption_text()
 	return $footer;
 }
 
+/**
+ * Sets the title text for the image popup
+ *
+ * @return string
+ */
 function hs4smf_heading_text()
 {
 	global $modSettings, $context;
@@ -539,6 +532,11 @@ function hs4smf_heading_text()
 	return $footer;
 }
 
+/**
+ * Determines where the caption should be placed on the image
+ *
+ * @return string
+ */
 function hs4smf_caption_position()
 {
 	global $modSettings;
@@ -562,6 +560,11 @@ function hs4smf_caption_position()
 	return $footer;
 }
 
+/**
+ * Determines where the heading should be positioned on the image
+ *
+ * @return string
+ */
 function hs4smf_heading_position()
 {
 	global $modSettings;
@@ -585,6 +588,10 @@ function hs4smf_heading_position()
 	return $footer;
 }
 
+/**
+ * Set the width of the caption overlays
+ * @return string
+ */
 function hs4smf_set_width()
 {
 	// Set the width of the caption overlays
@@ -594,6 +601,11 @@ function hs4smf_set_width()
 	return $footer;
 }
 
+/**
+ * Based on the admin settings, decide what to do with the mouse pointer
+ *
+ * @return type
+ */
 function hs4smf_mouse_action()
 {
 	global $modSettings;
@@ -604,6 +616,11 @@ function hs4smf_mouse_action()
 	return $footer;
 }
 
+/**
+ * Opacity level of the background when the image slides
+ *
+ * @return string
+ */
 function hs4smf_hc_opacity()
 {
 	global $modSettings;
@@ -620,6 +637,11 @@ function hs4smf_hc_opacity()
 	return $footer;
 }
 
+/**
+ * Look of the border around the image
+ *
+ * @return string
+ */
 function hs4smf_frame_style()
 {
 	global $modSettings;
@@ -662,9 +684,15 @@ function hs4smf_frame_style()
 	return $footer;
 }
 
+/**
+ * Converts the acp setting to one the highslide JS understands
+ *
+ * @return string
+ */
 function hs4smf_dimming_opacity()
 {
 	global $modSettings;
+
 	$footer = '';
 	$opacity = 0;
 
@@ -678,9 +706,15 @@ function hs4smf_dimming_opacity()
 	return $footer;
 }
 
+/**
+ * Type of slide control to use, text or graphical
+ * @global type $modSettings
+ * @return string
+ */
 function hs4smf_control_wrapper()
 {
 	global $modSettings;
+	
 	$footer = '';
 
 	// set the slidshow control wrapper to use the correct controls
@@ -704,9 +738,17 @@ function hs4smf_control_wrapper()
 	return $footer;
 }
 
+/**
+ * Determines where to place the slideshow controls (back, forward, play, etc)
+ *  - attempts to adjust / correct the position based on other options the user may have chosen
+ *    such as control style, frame style, footer/header captions, etc
+ *
+ * @return string
+ */
+
 function hs4smf_slidshow_controls()
 {
-	global $txt, $modSettings, $settings, $context;
+	global $txt, $modSettings, $context;
 
 	loadLanguage('hs4smf');
 	$footer = '';
@@ -1035,6 +1077,11 @@ function hs4smf_slidshow_controls()
 	return $footer;
 }
 
+/**
+ * Language settings used by javascript
+ *
+ * @return string
+ */
 function hs4smf_language()
 {
 	global $txt;
@@ -1072,10 +1119,10 @@ restoreTitle:\'' . $txt['restoreTitle'] . '\'
 }
 
 /**
- * 	- open CDN project,  we encode the Highslide js and css files to point to this farm so that
- * 	  they are distributed from a closer server than ours.  MIGHT be faster if you have a lot
- * 	  of users from across the globe, if its just a local site, could be slower.  Who knows, saw
- * 	  this on the web blog (need to find the link to post) and thought it would be fun
+ * 	Open CDN project,  we encode the Highslide js and css files to point to this farm so that
+ * 	they are distributed from a closer server than ours.  MIGHT be faster if you have a lot
+ * 	of users from across the globe, if its just a local site, could be slower.  Who knows, saw
+ * 	this on the web blog (need to find the link to post) and thought it would be fun
  *
  * @param type $uri
  * @return string
@@ -1091,7 +1138,7 @@ function hs4smf_coralize_uri($uri)
 }
 
 /**
- * 	- Looks for the first occurrence of $needle in $haystack and replaces it with $replace, this is a single replace
+ * 	Looks for the first occurrence of $needle in $haystack and replaces it with $replace, this is a single replace
  *
  * @param type $needle
  * @param type $replace
@@ -1111,14 +1158,13 @@ function hs4smf_str_replace_once($needle, $replace, $haystack)
 }
 
 /**
- * 	- Used to format avea slidegroup images (signatures at this point)
+ * Used to format avea slidegroup images (signatures at this point)
  * 	- adds our styling for any avea media embeds
  * 	- Optionaly adds in javascipt functions so smg images clicks will count as views
  * 	- Removes the loading of a second css and highslide.js as well as hs options so all images have
  * 	  the style as defined by hs4smf
  * 	- Not used when in the gallery, only for messages
  *
- * @global type $modSettings
  * @return string
  */
 function aeva_initLightbox_hs4smf()
@@ -1180,6 +1226,11 @@ var mediaOptions = { slideshowGroup: \'aeva\'' .
 	return $script;
 }
 
+/**
+ * Replaces Aeva slide settings with this modifications so they act similar
+ * @param type $lightbox
+ * @return type
+ */
 function aeva_initGallery_hs4smf(&$lightbox)
 {
 	global $settings, $modSettings, $sourcedir, $context;
@@ -1220,7 +1271,7 @@ function aeva_initGallery_hs4smf(&$lightbox)
 }
 
 /**
- * 	- Case insensitive stripos replacement for php4 from subs-compat
+ * Case insensitive stripos replacement for php4 from subs-compat
  *
  */
 if (!function_exists('stripos'))
@@ -1233,8 +1284,7 @@ if (!function_exists('stripos'))
 }
 
 /**
- * 	- Case insensitive str_replace function for those that don't have PHP5 installed
- *
+ * Case insensitive str_replace function for those that don't have PHP5 installed
  */
 if (!function_exists('str_ireplace'))
 {
@@ -1253,6 +1303,11 @@ if (!function_exists('str_ireplace'))
 }
 
 // These 3 functions are our integration hooks, they simply add the info to the admin panel for use
+/**
+ * Add highslide ot the modification settings menu
+ * @global type $txt
+ * @param array $admin_areas
+ */
 function iaa_hs4smf(&$admin_areas)
 {
 	global $txt;
@@ -1261,11 +1316,20 @@ function iaa_hs4smf(&$admin_areas)
 	$admin_areas['config']['areas']['modsettings']['subsections']['hs4smf'] = array($txt['mods_cat_modifications_hs4smf']);
 }
 
+/**
+ * Adds the subaction to the modigy menuy
+ *
+ * @param array $sub_actions
+ */
 function imm_hs4smf(&$sub_actions)
 {
 	$sub_actions['hs4smf'] = 'Modifyhs4smfsettings';
 }
 
+/**
+ * The settings page for the modificaiton
+ * @return array
+ */
 function Modifyhs4smfsettings($return_config = false)
 {
 	global $txt, $scripturl, $context;
@@ -1395,4 +1459,3 @@ function Modifyhs4smfsettings($return_config = false)
 	}
 	prepareDBSettingContext($config_vars);
 }
-?>
