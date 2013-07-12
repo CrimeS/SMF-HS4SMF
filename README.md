@@ -2,7 +2,7 @@
 ---
   
 **License**  
-This modification is released under a BSD license, a copy of it with its provisions is included with the package.  
+This modification is released under a MPL V1.1 license, a copy of it with its provisions is included with the package.
   
 **Introduction**  
 This modification adds the highslide lightbox effect to images and attachments in your post.  

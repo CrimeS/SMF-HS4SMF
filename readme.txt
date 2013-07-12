@@ -6,7 +6,7 @@
 [hr]
 
 [color=blue][b][size=12pt][u]License[/u][/size][/b][/color]
-This modification is released under a BSD license, a copy of it with its provisions is included with the package.
+This modification is released under a MPL V1.1 license, a copy of it with its provisions is included with the package.
 
 [color=blue][b][size=12pt][u]Introduction[/u][/size][/b][/color]
 This modification adds the highslide lightbox effect to images and attachments in your post.
@@ -63,7 +63,7 @@ o + Updated highslide to 4.1.13
 o + Moved HS language strings to language file from js files
 o + Moved hs4smf language strings to own file instead of modifications.language
 o + Added option to count highslide views in a message as a gallery view
-o + Added license BSD 2 clause
+o + Added open license
 o ! Fixed error with captionOverlay opacity
 o ! Small updates to options panel layout
 o ! Some code cleanup, needs more :X

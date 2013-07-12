@@ -8,7 +8,7 @@ o + Updated highslide to 4.1.13
 o + Moved HS language strings to language file from js files
 o + Moved hs4smf language strings to own file instead of modifications.language
 o + Added option to count highslide views in a message as a gallery view
-o + Added license BSD 2 clause
+o + Added open license
 o ! Fixed error with captionOverlay opacity
 o ! Small updates to options panel layout
 o ! Some code cleanup, needs more :X

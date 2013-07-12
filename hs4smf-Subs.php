@@ -5,7 +5,7 @@
  * @package "Highslide 4 SMF (HS-4-SMF)" Mod for Simple Machines Forum (SMF) V2.0
  * @author Spuds
  * @copyright (c) 2011 Spuds
- * @license license.txt (included with package) BSD
+ * @license Mozilla Public License version 1.1 http://www.mozilla.org/MPL/1.1/.
  *
  * @version 0.8
  *
