@@ -5,7 +5,15 @@
 	<id>spuds:HS4SMF</id>
 	<type>modification</type>
 	<version>0.8.1</version>
-
+	<license><![CDATA[
+/**
+ * Highslide 4 SMF
+ *
+ * @license MPL 1.1 http://mozilla.org/MPL/1.1/
+ *
+ * @version 1.1
+ */
+]]></license>
 	<install for="2.0 - 2.0.99">
 		<database>add_settings.php</database>
 		<code>add_remove_hooks.php</code>

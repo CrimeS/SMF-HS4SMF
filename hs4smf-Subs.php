@@ -244,6 +244,7 @@ function hs4wsmf_anchor_link_prepare($str, $slidegroup)
 			}
 		}
 	}
+
 	// not an image so leave it alone
 	return $str;
 }
@@ -494,6 +495,7 @@ function hs4smf_caption_text()
 				break;
 		}
 	}
+
 	return $footer;
 }
 
@@ -529,6 +531,7 @@ function hs4smf_heading_text()
 				break;
 		}
 	}
+
 	return $footer;
 }
 
@@ -557,6 +560,7 @@ function hs4smf_caption_position()
 				break;
 		}
 	}
+
 	return $footer;
 }
 
@@ -585,6 +589,7 @@ function hs4smf_heading_position()
 				break;
 		}
 	}
+
 	return $footer;
 }
 
@@ -634,6 +639,7 @@ function hs4smf_hc_opacity()
 		if ($opacity > 0)
 			$footer = 'hs.captionOverlay.opacity = ' . $opacity . ";\n" . 'hs.headingOverlay.opacity = ' . $opacity . ";\n";
 	}
+
 	return $footer;
 }
 
@@ -681,6 +687,7 @@ function hs4smf_frame_style()
 				break;
 		}
 	}
+
 	return $footer;
 }
 
@@ -703,6 +710,7 @@ function hs4smf_dimming_opacity()
 		if ($opacity > 0)
 			$footer = 'hs.dimmingOpacity = ' . $opacity . ";\n";
 	}
+
 	return $footer;
 }
 
@@ -714,7 +722,7 @@ function hs4smf_dimming_opacity()
 function hs4smf_control_wrapper()
 {
 	global $modSettings;
-	
+
 	$footer = '';
 
 	// set the slidshow control wrapper to use the correct controls
@@ -735,6 +743,7 @@ function hs4smf_control_wrapper()
 				break;
 		}
 	}
+
 	return $footer;
 }
 
@@ -790,6 +799,7 @@ function hs4smf_slidshow_controls()
 				$interval = (!empty($modSettings['hs4smf_slideshowdelay'])) ? intval($modSettings['hs4smf_slideshowdelay'] * 1000) : 5000;
 				if ($interval < 1000)
 					$interval = 5000;
+
 				$footer .= "interval: " . $interval . ",";
 				$footer .= (!empty($modSettings['hs4smf_slideshowrepeat'])) ? "repeat: true," : "repeat: false,";
 
@@ -1061,10 +1071,13 @@ function hs4smf_slidshow_controls()
 					default:
 						break;
 				}
+
 				if (isset($modSettings['hs4smf_nudgex']))
-					$X+= $modSettings['hs4smf_nudgex'];
+					$X += $modSettings['hs4smf_nudgex'];
+
 				if (isset($modSettings['hs4smf_nudgey']))
-					$Y+= $modSettings['hs4smf_nudgey'];
+					$Y += $modSettings['hs4smf_nudgey'];
+
 				$footer .= 'offsetX: ' . $X . ',offsetY: ' . $Y . ',';
 
 				// last line, no trailing , or ie7- will toss an error for no good reason
@@ -1132,8 +1145,10 @@ function hs4smf_coralize_uri($uri)
 	// simply adds on the .nyud.net to a link so it points to the open CDN, usally does not work :P
 	if (stristr($uri, "http://") === false)
 		return $uri;
+
 	$tmp = explode("/", $uri, 4);
 	$cor = $tmp[0] . '/' . $tmp[1] . '/' . $tmp[2] . '.nyud.net/' . $tmp[3];
+
 	return $cor;
 }
 
@@ -1154,6 +1169,7 @@ function hs4smf_str_replace_once($needle, $replace, $haystack)
 		// Nothing found
 		return $haystack;
 	}
+
 	return substr_replace($haystack, $replace, $pos, strlen($needle));
 }
 
@@ -1317,7 +1333,7 @@ function iaa_hs4smf(&$admin_areas)
 }
 
 /**
- * Adds the subaction to the modigy menuy
+ * Adds the subaction to the modify menu
  *
  * @param array $sub_actions
  */
@@ -1328,7 +1344,6 @@ function imm_hs4smf(&$sub_actions)
 
 /**
  * The settings page for the modificaiton
- * @return array
  */
 function Modifyhs4smfsettings($return_config = false)
 {
