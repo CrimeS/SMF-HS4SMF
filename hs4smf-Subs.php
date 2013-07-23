@@ -74,8 +74,9 @@ function hs4smf(&$message, $id_msg = -1)
 		// As long as we have images to work on
 		foreach ($images as $image)
 		{
-			// not on the smileys, avatars, alt="ns" or img tags from attachments, icons etc ... primarily to find smileys since they are IN the
-			// message, next is the NS override, the rest should not happen but .....
+			// not on the smileys, avatars, alt="ns" or img tags from attachments, icons etc ...
+			// primarily to find smileys since they are IN the message, next is the NS override,
+			// the rest should not happen but .....
 			if (stripos($image['img_tag'], 'class="smiley"'))
 				continue;
 			elseif (stripos($image['img_tag'], 'alt="&quot;ns&quot;"'))
@@ -102,7 +103,9 @@ function hs4smf(&$message, $id_msg = -1)
 			}
 			else
 				$image['replacement'] = $image[0];
-			// we have special processing needs for image hosting sites in order to find the real image to expand, so if we have a valid domain
+
+			// we have special processing needs for image hosting sites in order to find the real image to expand,
+			// so if we have a valid domain
 			$domain = array();
 			if (preg_match('~^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$~i', $image['a_link']))
 			{
@@ -114,17 +117,20 @@ function hs4smf(&$message, $id_msg = -1)
 				{
 					if (stripos($image['domain_url'], $host) !== false)
 					{
-						// If image[1] was not set, set it now for externally hosted sites so [img] tags outside of a [url] tag will slide
+						// If image[1] was not set, set it now for externally hosted sites so [img] tags outside
+						// of a [url] tag will slide
 						if (empty($image[1]))
 							$image[1] = $image['a_tag'];
+
 						$image = hs4smf_fix_link($image);
 						break;
 					}
 				}
 			}
 
-			// build the anchor tag replacement, if we created the anchor tag ourselves (none was existing), use it to search and replace, otherwise
-			// use the original tag ($image[1]) as we could have altered the a_tag (image hosting site) in a normal link and need to swap that in
+			// build the anchor tag replacement, if we created the anchor tag ourselves (none was existing), use
+			// it to search and replace, otherwise use the original tag ($image[1]) as we could have altered
+			// the a_tag (image hosting site) in a normal link and need to swap that in
 			if (empty($image[1]))
 				$image['replacement'] = str_ireplace($image['a_tag'], hs4wsmf_anchor_link_prepare($image['a_tag'], $slidegroup), $image['replacement']);
 			else
@@ -140,9 +146,11 @@ function hs4smf(&$message, $id_msg = -1)
 			// swap out the old with the new
 			$message = hs4smf_str_replace_once($image[0], $image['replacement'], $message);
 		}
+
 		// create / update slide show tracking
 		hs4smf_track_slidegroup($id_msg);
 	}
+
 	return;
 }
 
@@ -151,7 +159,6 @@ function hs4smf(&$message, $id_msg = -1)
  * 	hosting site, this allows them to expand in place and not redirect.
  *
  * @param string $image
- * @return string
  */
 function hs4smf_fix_link($image)
 {
@@ -203,6 +210,8 @@ function hs4smf_fix_link($image)
 		$out = $out[1] . '_b.' . $out[2];
 	elseif (stripos($image['domain_url'], 'smugmug') !== false && preg_match('~(.*?)(?:\/S\/)(.*?)(?:-S)\.(png|gif|jp(e)?g|bmp)$~is' . ($context['utf8'] ? 'u' : ''), $image[4], $out))
 		$out = $out[1] . '/O/' . $out[2] . '.' . $out[3];
+	elseif (stripos($image['domain_url'], 'googleusercontent') !== false && preg_match('~(.*?)/(?:s\d{3,4}|)/([^/]*?)\.(png|gif|jp(e)?g|bmp)$~is' . ($context['utf8'] ? 'u' : ''), $image[4], $out))
+		$out = $out[1] . '/s800/' . $out[2] . '.' . $out[3];
 	else
 		return $image;
 
