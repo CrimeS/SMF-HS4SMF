@@ -7,7 +7,7 @@
  * @copyright (c) 2011 Spuds
  * @license Mozilla Public License version 1.1 http://www.mozilla.org/MPL/1.1/.
  *
- * @version 0.8
+ * @version 0.8.2
  *
  * -----------------------------------------------------------------------------------------------
  * Adds a highslide 'lighbox' effect to images and attachments.  With the mod enabled all images
@@ -38,9 +38,9 @@ function hs4smf(&$message, $id_msg = -1)
 	if (empty($modSettings['hs4smf_enabled']) || empty($modSettings['enableBBC']))
 		return;
 
-	// init some thangs
+	// Init some thangs
 	$context['hs4smf_img_count'] = 0;
-	$image_hosters = array('imageshack', 'photobucket', 'ipicture', 'radikal', 'keep4u', 'fotosik', 'xs', 'postimage', 'ggpht', 'flickr', 'smugmug');
+	$image_hosters = array('imageshack', 'photobucket', 'ipicture', 'radikal', 'keep4u', 'fotosik', 'xs', 'postimage', 'postimg', 'ggpht', 'flickr', 'smugmug');
 	$regex = '~(?P<a_tag><a href="(?P<a_link>[^"]*?)"(?:[^>]*?)>|)(?P<img_tag><img src=[""' . '\'](?P<img_src>.*?)[""' . '\'](?:[^>]*?)>)(?:</a>|)~si';
 
 	// Do we have Aeva installed, if so lets move the [smg embedded images in to our slidegroups
@@ -57,7 +57,7 @@ function hs4smf(&$message, $id_msg = -1)
 			else
 				$message = str_replace('onclick="return hs.expand(this, slideOptions)', 'onclick="return hs.expand(this, {slideshowGroup:\'fullgroup\'})', $message);
 
-			// keep track of how many images we are sliding in this message
+			// Track of how many images we are sliding in this message
 			$context['hs4smf_img_count'] = $smg_count;
 			hs4smf_track_slidegroup($id_msg);
 		}
@@ -68,7 +68,7 @@ function hs4smf(&$message, $id_msg = -1)
 	$images = array();
 	if (preg_match_all($regex, $message, $images, PREG_SET_ORDER))
 	{
-		// get the slide show groupings, message based or topic based
+		// Get the slide show groupings, message based or topic based
 		$slidegroup = hs4smf_get_slidegroup($id_msg);
 
 		// As long as we have images to work on
@@ -128,7 +128,7 @@ function hs4smf(&$message, $id_msg = -1)
 				}
 			}
 
-			// build the anchor tag replacement, if we created the anchor tag ourselves (none was existing), use
+			// Build the anchor tag replacement, if we created the anchor tag ourselves (none was existing), use
 			// it to search and replace, otherwise use the original tag ($image[1]) as we could have altered
 			// the a_tag (image hosting site) in a normal link and need to swap that in
 			if (empty($image[1]))
@@ -136,18 +136,18 @@ function hs4smf(&$message, $id_msg = -1)
 			else
 				$image['replacement'] = str_ireplace($image[1], hs4wsmf_anchor_link_prepare($image['a_tag'], $slidegroup), $image['replacement']);
 
-			// check the image tag, if it contains the class bbc_img resized we need to change it so smf does not try to expand it
+			// Check the image tag, if it contains the class bbc_img resized we need to change it so smf does not try to expand it
 			if (stripos($image['img_tag'], 'bbc_img resized'))
 			{
 				$image['img_tag'] = str_ireplace('bbc_img resized', 'bbc_img', $image['img_tag']);
 				$image['replacement'] = str_ireplace($image[3], $image['img_tag'], $image['replacement']);
 			}
 
-			// swap out the old with the new
+			// Swap out the old with the new
 			$message = hs4smf_str_replace_once($image[0], $image['replacement'], $message);
 		}
 
-		// create / update slide show tracking
+		// Create / update slide show tracking
 		hs4smf_track_slidegroup($id_msg);
 	}
 
@@ -194,7 +194,7 @@ function hs4smf_fix_link($image)
 	}
 	elseif (stripos($image['domain_url'], 'xs') !== false && preg_match('~(.*?)\.(?:jpg.xs\.|)(png|gif|jp(e)?g|bmp)$~is' . ($context['utf8'] ? 'u' : ''), $image[4], $out))
 		$out = $out[1] . '.' . $out[2];
-	elseif (stripos($image['domain_url'], 'postimage') !== false && !empty($image[2]))
+	elseif (stripos($image['domain_url'], 'postim') !== false && !empty($image[2]))
 	{
 		// postimage.org appears to set the full image name based on the user agent, different agents generate different image names ...
 		$link = array();
